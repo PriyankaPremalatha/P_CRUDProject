@@ -1,0 +1,20 @@
+Folder PATH listing
+Volume serial number is DAA7-3850
+C:.
+|   db.sqlite3
+|   manage.py
+|   Resultant.txt
+|   
+\---firstdjango
+    |   asgi.py
+    |   settings.py
+    |   urls.py
+    |   wsgi.py
+    |   __init__.py
+    |   
+    \---__pycache__
+            settings.cpython-38.pyc
+            urls.cpython-38.pyc
+            wsgi.cpython-38.pyc
+            __init__.cpython-38.pyc
+            

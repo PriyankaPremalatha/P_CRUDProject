@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	
+	{% load static%}
+	<link rel="stylesheet" type="text/css" href="{% static 'effects/style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	
+	<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+
+</head>
+<body>
+
+{% block content %}	
+<div align="center" style="margin-top: 50px;">
+	<div class="card" style="width:600px; height: 400px; ">
+<div class="card-header" style="background-color:#900C3F; color: white;font-family: palatino linotype; ">
+		<h2>Registration Form</h2>
+    </div>
+    <div class="card-body" style="background-color:#C2F3C1;">
+      {% csrf_token %}
+      <form id="registerUser" action="">
+      
+        <div class="row">
+
+        	<div class="col-sm-6">
+        	<input placeholder="First Name" class="form-control" type="text" name="firstname" autocomplete="off">
+          </div>
+          <div class="col-sm-6">
+          <input class="form-control" type="text" name="lastname" autocomplete="off" placeholder="Last Name">
+          </div>
+        	
+        </div><br>
+
+        
+        <div class="row">
+        	
+        	<div class="col-sm-12">
+        	<input class="form-control" type="email" name="email" autocomplete="off" placeholder="Email">
+        	</div>
+        </div><br>
+
+        <div class="row">
+        	
+        	<div class="col-sm-12">
+        	<input class="form-control" type="text" name="mobile" autocomplete="off" placeholder="Phone Number">
+        	</div>
+        </div><br>
+
+        <div class="row">
+        
+        	<div class="col-sm-6">
+        	<input class="form-control" type="Password" name="password" autocomplete="off" placeholder="Password">
+        	</div>
+          <div class="col-sm-6">
+          <input class="form-control" type="Password" name="conpassword" autocomplete="off" placeholder="Confirm Password">
+          </div>
+        </div><br><br>
+        
+      <div class="col-sm-12">
+      <button class="btn btn-primary" type="submit" style="color:white;font-size: 20px; font-family: century schoobook">SUBMIT</button>
+        
+        </div>
+      </div>
+  </form>
+</div>
+</div>
+{% endblock %}	
+
+
+{% block javascript %}
+
+
+ <script type="text/javascript">
+
+
+$("form#registerUser").submit(function(){
+
+  var fnameInput=$('input[name="firstname"]').val().trim();
+  var lnameInput=$('input[name="lastname"]').val().trim();
+  var emailInput=$('input[name="email"]').val().trim();
+  var mobileInput=$('input[name="mobile"]').val().trim();
+  var passwordInput=$('input[name="password"]').val().trim();
+
+  if(fnameInput && lnameInput && emailInput && mobileInput && passwordInput)
+  {
+    $.ajax({
+
+        url:'{% url "registrationuser" %}',
+        data:{
+
+            'firstname':fnameInput,
+                'lastname':lnameInput,
+                'email':emailInput,
+                'mobile':mobileInput,
+                'password':passwordInput,
+
+        },
+         dataType:'json' ,
+         success:function(data)
+         {
+            alert('Registered Successfully')
+            
+         }
+
+    });
+   }
+   else
+    {
+        alert('Fill the missing values');
+    }
+
+
+    $('form#registerUser').trigger("reset");
+    return false;
+
+});
+
+
+
+</script>
+{% endblock javascript %}
+
+
+
+
+
+	
+
+</body>
+</html>
